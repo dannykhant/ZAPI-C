@@ -1,0 +1,17 @@
+### ZAPI-C
+
+Zabbix API Poller in Clang
+
+# Usage:
+
+	./zapi <url> <username> <password> <method> <params> 
+
+Example:
+
+	./zapi http://127.0.0.1/zabbix/api_jsonrpc.php Admin zabbix host.get "{\"output\": [\"hostid\"],\"filter\": {\"host\": [\"Zabbix server\"]}}"
+
+
+# Compile ZAPI-C
+
+	gcc zapi.c -o zapi -lcurl -ljson-c 
+

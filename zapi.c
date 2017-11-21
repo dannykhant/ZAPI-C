@@ -11,9 +11,9 @@ char * requestData(char *url, char *data);
 
 int main(int argc, char *argv[]) {
 
-	if(argc != 5) {
+	if(argc != 6) {
 		// check required user argument 
-		printf("Usage: %s url username password query\n", argv[0]);
+		printf("Usage: %s url username password method params\n", argv[0]);
 
 	} else {
 
@@ -32,15 +32,13 @@ int main(int argc, char *argv[]) {
 
 	
 		// get size of user query 
-		//size = snprintf(NULL, 0, "{\"jsonrpc\": \"2.0\",\"method\": \"trend.get\",\"params\":{\"output\": [\"value_avg\",\"item_id\"],\"time_from\":\"1504828800\",\"time_till\":\"1505056500\",\"limit\":10},\"auth\": \"%s\",\"id\": 1 }", sessionId);
-		size = snprintf(NULL, 0, "{\"jsonrpc\": \"2.0\",\"method\": \"trend.get\",\"params\": %s,\"auth\": \"%s\",\"id\": 1 }", argv[4], sessionId);
+		size = snprintf(NULL, 0, "{\"jsonrpc\": \"2.0\",\"method\": \"%s\",\"params\": %s,\"auth\": \"%s\",\"id\": 1 }", argv[4], argv[5], sessionId);
 
 		// allocate memory for user query
 		userData = (char *)malloc(size + 1);
 
 		// allocate as userData
-		//snprintf(userData, size+1, "{\"jsonrpc\": \"2.0\",\"method\": \"trend.get\",\"params\":{\"output\": [\"value_avg\",\"item_id\"],\"time_from\":\"1504828800\",\"time_till\":\"1505056500\",\"limit\":10},\"auth\": \"%s\",\"id\": 1 }", sessionId);
-		snprintf(userData, size+1, "{\"jsonrpc\": \"2.0\",\"method\": \"trend.get\",\"params\": %s,\"auth\": \"%s\",\"id\": 1 }", argv[4], sessionId);
+		snprintf(userData, size+1, "{\"jsonrpc\": \"2.0\",\"method\": \"%s\",\"params\": %s,\"auth\": \"%s\",\"id\": 1 }", argv[4], argv[5], sessionId);
 
 		// return response
 		printf("%s\n", requestData(url, userData));
